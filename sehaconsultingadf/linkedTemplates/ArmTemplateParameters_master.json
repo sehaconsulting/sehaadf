@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "sehaconsultingadf"
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
+		"AzureKeyVault2_properties_typeProperties_baseUrl": {
+			"value": "https://SnowflakeAKV.vault.azure.net/"
+		},
+		"Snowflake1_connectionString": {
+			"value": ""
+		},
+		"Snowflake2_properties_typeProperties_connectionString_secretName": {
+			"value": "sehajdbc"
+		},
+		"linkedService1_sasUri": {
+			"value": ""
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
