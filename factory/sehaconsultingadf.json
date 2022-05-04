@@ -1,0 +1,9 @@
+{
+	"name": "sehaconsultingadf",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "511d32e5-ff30-443e-845d-5947459641ec",
+		"tenantId": "bba882ef-b0b8-4367-bdd3-90ceeb58e2a8"
+	}
+}

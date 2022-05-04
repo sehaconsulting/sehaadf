@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_yqg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TEAMB",
+			"table": "DEVICECGM"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,35 @@
+{
+	"name": "Snowflake Create Table As",
+	"properties": {
+		"activities": [
+			{
+				"name": "snowflake test",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "Snowflake1",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "create table \"DEV\".\"TEAMB\".\"AliTest2\" AS\nselect * from \"DEV\".\"TEAMA\".\"ALITEST\""
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-04-08T12:00:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
