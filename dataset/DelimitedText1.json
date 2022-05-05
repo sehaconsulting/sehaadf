@@ -1,0 +1,53 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Pt105.csv",
+				"folderPath": "Patient",
+				"fileSystem": "demo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "recid",
+				"type": "String"
+			},
+			{
+				"name": "PtID",
+				"type": "String"
+			},
+			{
+				"name": "ParentNDeviceUploadsID",
+				"type": "String"
+			},
+			{
+				"name": "DeviceDtTm",
+				"type": "String"
+			},
+			{
+				"name": "RecordType",
+				"type": "String"
+			},
+			{
+				"name": "Value",
+				"type": "String"
+			},
+			{
+				"name": "ValRange",
+				"type": "String"
+			}
+		]
+	}
+}
