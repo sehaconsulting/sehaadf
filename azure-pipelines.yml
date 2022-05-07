@@ -11,15 +11,3 @@ pool:
 
 steps:
 
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'Azure subscription 1(9d67adc3-5559-4dd7-a1d2-9abce7b87f47)'
-    subscriptionId: '9d67adc3-5559-4dd7-a1d2-9abce7b87f47'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'optimusfoxrg'
-    location: 'Central US'
-    templateLocation: 'URL of the file'
-    csmFileLink: 'sehaconsultingadf/ARMTemplateForFactory.json'
-    csmParametersFileLink: 'sehaconsultingadf/ARMTemplateParametersForFactory.json'
-    deploymentMode: 'Incremental'
