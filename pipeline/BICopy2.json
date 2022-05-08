@@ -35,10 +35,10 @@
 					"enableStaging": true,
 					"stagingSettings": {
 						"linkedServiceName": {
-							"referenceName": "linkedService3",
+							"referenceName": "linkedService2",
 							"type": "LinkedServiceReference"
 						},
-						"path": ""
+						"path": "data/adfstaging"
 					},
 					"translator": {
 						"type": "TabularTranslator",
