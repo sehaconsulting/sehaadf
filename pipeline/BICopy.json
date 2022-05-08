@@ -35,7 +35,7 @@
 					"enableStaging": true,
 					"stagingSettings": {
 						"linkedServiceName": {
-							"referenceName": "AzureDataLakeStorage1",
+							"referenceName": "linkedService2",
 							"type": "LinkedServiceReference"
 						},
 						"path": "data/adfstaging"
