@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"sasUri": "https://accountali.blob.core.windows.net/demo/Patient",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEMxQzk2RDlCLTlFOTMtNDA3QS1CMzE1LTIxQTAwNDczNDdCMl9hNzRjODcxOC0yMTUzLTQ4OTItOTI3NC1jYjRiYzg4ZDlkN2QiDQp9"
+			"sasUri": "https://accountali.blob.core.windows.net/demo",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEMxQzk2RDlCLTlFOTMtNDA3QS1CMzE1LTIxQTAwNDczNDdCMl8yOTg5NTVmYy03MDhkLTQwNWUtYTdhOS0wMGQzNDMwMjkyZDMiDQp9"
 		}
 	}
 }
