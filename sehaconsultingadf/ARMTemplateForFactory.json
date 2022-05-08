@@ -34,6 +34,14 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://accountali.dfs.core.windows.net"
+		},
+		"linkedService2_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'linkedService2'"
+		},
+		"linkedService3_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'linkedService3'"
 		}
 	},
 	"variables": {
@@ -215,8 +223,8 @@
 				"type": "SnowflakeTable",
 				"schema": [],
 				"typeProperties": {
-					"schema": "TEAMB",
-					"table": "DEVICECGM"
+					"schema": "RAW",
+					"table": "DALLASBI"
 				}
 			},
 			"dependsOn": [
@@ -392,6 +400,328 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BICopy')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "SnowflakeSink",
+								"importSettings": {
+									"type": "SnowflakeImportCopyCommand"
+								}
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "linkedService1",
+									"type": "LinkedServiceReference"
+								},
+								"path": ""
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "PtID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PTID",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "ParentNDeviceUploadsID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PARENTNDEVICEUPLOADSID",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "DeviceDtTm",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DEVICEDTTM",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RecId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RECID",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "RecordType",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RECORDTYPE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DVALUE",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "ValRange",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALRANGE",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_yqg",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_yqg')]",
+				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"sasUri": "[parameters('linkedService2_sasUri')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BICopy2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1_copy1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "SnowflakeSink",
+								"importSettings": {
+									"type": "SnowflakeImportCopyCommand"
+								}
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "linkedService2",
+									"type": "LinkedServiceReference"
+								},
+								"path": "data/adfstaging"
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "PtID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PTID",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "ParentNDeviceUploadsID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PARENTNDEVICEUPLOADSID",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "DeviceDtTm",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DEVICEDTTM",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RecId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RECID",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"name": "RecordType",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RECORDTYPE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DVALUE",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "ValRange",
+											"type": "String"
+										},
+										"sink": {
+											"name": "VALRANGE",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_yqg",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_yqg')]",
+				"[concat(variables('factoryId'), '/linkedServices/linkedService2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"sasUri": "[parameters('linkedService3_sasUri')]"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }
