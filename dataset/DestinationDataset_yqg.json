@@ -9,8 +9,8 @@
 		"type": "SnowflakeTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "TEAMB",
-			"table": "DEVICECGM"
+			"schema": "RAW",
+			"table": "DallasBI"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
