@@ -18,7 +18,7 @@
 					"source": {
 						"type": "SnowflakeSource",
 						"query": {
-							"value": "@concat(\n'select DIV0(s.s1, f.f1) as t1\nfrom (select count(*) as s1 from '\n,    ' dev.stage.dallasbi '\n, ' ) s\ncross join\n(select count(*) as f1 from '\n,      ' dev.final.dallasbi '\n,   ' ) f'\n)",
+							"value": "@concat(\n'select DIV0(s.s1, f.f1) as t1\nfrom (select count(*) as s1 from '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.stageschema, '.', pipeline().parameters.target)\n, ' ) s\ncross join\n(select count(*) as f1 from '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.finalschema, '.', pipeline().parameters.target)\n,   ' ) f'\n)",
 							"type": "Expression"
 						},
 						"exportSettings": {
