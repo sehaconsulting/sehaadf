@@ -1,9 +1,9 @@
 {
-	"name": "Snowflake Create Table As",
+	"name": "Load",
 	"properties": {
 		"activities": [
 			{
-				"name": "snowflake test",
+				"name": "Stage",
 				"type": "Script",
 				"dependsOn": [],
 				"policy": {
@@ -22,7 +22,10 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "create table \"DEV\".\"TEAMB\".\"AliTest2\" AS\nselect * from \"DEV\".\"TEAMA\".\"ALITEST\""
+							"text": {
+								"value": "@concat('create '\n, pipeline().parameters.targettype\n, ' '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.stageschema, '.', pipeline().parameters.target)\n, ' as '\n, pipeline().parameters.inputSQL\n)",
+								"type": "Expression"
+							}
 						}
 					]
 				}
