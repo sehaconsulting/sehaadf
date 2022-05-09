@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"linkedServiceName": {
-					"referenceName": "Snowflake1",
+					"referenceName": "Snowflake2",
 					"type": "LinkedServiceReference"
 				},
 				"typeProperties": {
@@ -24,6 +24,83 @@
 							"type": "Query",
 							"text": {
 								"value": "@concat('create '\n, pipeline().parameters.targettype\n, ' '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.stageschema, '.', pipeline().parameters.target)\n, ' as '\n, pipeline().parameters.inputSQL\n)",
+								"type": "Expression"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Run Count Test",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Stage",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CountTest",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"target": {
+							"value": "@pipeline().parameters.target",
+							"type": "Expression"
+						},
+						"stageschema": {
+							"value": "@pipeline().parameters.stageschema",
+							"type": "Expression"
+						},
+						"finalschema": {
+							"value": "@pipeline().parameters.finalschema",
+							"type": "Expression"
+						},
+						"db": {
+							"value": "@pipeline().parameters.db",
+							"type": "Expression"
+						},
+						"threshold": {
+							"value": "@pipeline().parameters.threshold",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "swap",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "Run Count Test",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "Snowflake2",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": {
+								"value": "@concat('alter table '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.finalschema, '.', pipeline().parameters.target)\n, ' swap with '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.stageschema, '.', pipeline().parameters.target)\n)",
 								"type": "Expression"
 							}
 						}
