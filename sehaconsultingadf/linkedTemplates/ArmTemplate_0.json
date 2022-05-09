@@ -179,6 +179,36 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"parameters": {
+					"inputSQL": {
+						"type": "string",
+						"defaultValue": "select  * from dev.raw.dallasbi where valrange in ('Low', 'High')"
+					},
+					"stageschema": {
+						"type": "string",
+						"defaultValue": "stage"
+					},
+					"finalschema": {
+						"type": "string",
+						"defaultValue": "final"
+					},
+					"db": {
+						"type": "string",
+						"defaultValue": "dev"
+					},
+					"target": {
+						"type": "string",
+						"defaultValue": "dallasbi"
+					},
+					"targettype": {
+						"type": "string",
+						"defaultValue": "table"
+					},
+					"threshold": {
+						"type": "float",
+						"defaultValue": 0.75
+					}
+				},
 				"annotations": [],
 				"lastPublishTime": "2022-04-08T12:00:10Z"
 			},
