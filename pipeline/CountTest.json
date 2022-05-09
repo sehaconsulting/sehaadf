@@ -45,7 +45,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greaterOrEquals(activity('Lookup1').output.value, pipeline().parameters.threshold)",
+						"value": "@greaterOrEquals(activity('Lookup1').output.firstrow.t1, pipeline().parameters.threshold)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
