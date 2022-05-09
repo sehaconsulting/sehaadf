@@ -342,6 +342,24 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ThresholdPlaceholder')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Snowflake1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Snowflake1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CopyPipeline_yqg')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -754,6 +772,75 @@
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_yqg')]",
 				"[concat(variables('factoryId'), '/linkedServices/linkedService2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CountTest')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup1",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SnowflakeSource",
+								"query": {
+									"value": "@concat(\n'select s.s1, f.f1, DIV0(s.s1, f.f1) as t1\nfrom (select count(*) as s1 from '\n,    ' dev.stage.dallasbi '\n, ' ) s\ncross join\n(select count(*) as f1 from '\n,      ' dev.final.dallasbi '\n,   ' ) f'\n)",
+									"type": "Expression"
+								},
+								"exportSettings": {
+									"type": "SnowflakeExportCopyCommand"
+								}
+							},
+							"dataset": {
+								"referenceName": "ThresholdPlaceholder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"target": {
+						"type": "string",
+						"defaultValue": "dallasbi"
+					},
+					"stageschema": {
+						"type": "string",
+						"defaultValue": "stage"
+					},
+					"finalschema": {
+						"type": "string",
+						"defaultValue": "final"
+					},
+					"db": {
+						"type": "string",
+						"defaultValue": "dev"
+					},
+					"threshold": {
+						"type": "float",
+						"defaultValue": 0.75
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ThresholdPlaceholder')]"
 			]
 		}
 	]
