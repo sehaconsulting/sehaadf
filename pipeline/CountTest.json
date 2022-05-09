@@ -1,0 +1,59 @@
+{
+	"name": "CountTest",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SnowflakeSource",
+						"query": {
+							"value": "@concat(\n'select s.s1, f.f1, DIV0(s.s1, f.f1) as t1\nfrom (select count(*) as s1 from '\n,    ' dev.stage.dallasbi '\n, ' ) s\ncross join\n(select count(*) as f1 from '\n,      ' dev.final.dallasbi '\n,   ' ) f'\n)",
+							"type": "Expression"
+						},
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
+						}
+					},
+					"dataset": {
+						"referenceName": "ThresholdPlaceholder",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"target": {
+				"type": "string",
+				"defaultValue": "dallasbi"
+			},
+			"stageschema": {
+				"type": "string",
+				"defaultValue": "stage"
+			},
+			"finalschema": {
+				"type": "string",
+				"defaultValue": "final"
+			},
+			"db": {
+				"type": "string",
+				"defaultValue": "dev"
+			},
+			"threshold": {
+				"type": "float",
+				"defaultValue": 0.75
+			}
+		},
+		"annotations": []
+	}
+}
