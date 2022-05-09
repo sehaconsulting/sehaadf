@@ -49,7 +49,7 @@
 				"type": "string",
 				"defaultValue": "dallasbi"
 			},
-			"type": {
+			"targettype": {
 				"type": "string",
 				"defaultValue": "table"
 			},
