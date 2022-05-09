@@ -2,7 +2,7 @@
 	"name": "ThresholdPlaceholder",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Snowflake1",
+			"referenceName": "Snowflake2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
