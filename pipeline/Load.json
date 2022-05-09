@@ -23,7 +23,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "@concat('create '\n, pipeline().parameters.targettype\n, ' '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.stageschema, '.', pipeline().parameters.target)\n, ' as '\n, pipeline().parameters.inputSQL\n)",
+								"value": "@concat('create or replace '\n, pipeline().parameters.targettype\n, ' '\n, concat(pipeline().parameters.db, '.', pipeline().parameters.stageschema, '.', pipeline().parameters.target)\n, ' as '\n, pipeline().parameters.inputSQL\n)",
 								"type": "Expression"
 							}
 						}
