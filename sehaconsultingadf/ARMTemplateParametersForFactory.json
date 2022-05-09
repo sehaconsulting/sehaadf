@@ -5,11 +5,14 @@
 		"factoryName": {
 			"value": "sehaconsultingadf"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
 		"AzureSynapseAnalytics1_connectionString": {
 			"value": ""
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"value": ""
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://accountali.dfs.core.windows.net"
 		},
 		"AzureKeyVault2_properties_typeProperties_baseUrl": {
 			"value": "https://SnowflakeAKV.vault.azure.net/"
@@ -22,9 +25,6 @@
 		},
 		"linkedService1_sasUri": {
 			"value": ""
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "https://accountali.dfs.core.windows.net"
 		},
 		"linkedService2_sasUri": {
 			"value": ""
